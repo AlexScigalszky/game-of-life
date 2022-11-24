@@ -24,8 +24,8 @@ namespace GameOfLIfe.Implementations
         {
             var _random = new Random();
             return _random.NextSingle() > 0.5
-                ? new AliveCondition("Alive")
-                : new AliveCondition("Dead");
+                ? AliveConditionFactory.GetCondition("Alive")
+                : AliveConditionFactory.GetCondition("Dead");
         }
     }
 }

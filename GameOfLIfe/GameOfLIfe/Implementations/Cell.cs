@@ -4,7 +4,7 @@ namespace GameOfLIfe.Implementations
 {
     public class Cell : ICell
     {
-        public ICellState CurrentState { get; set; } = new AliveCondition("Dead");
+        public ICellState CurrentState { get; set; } = AliveConditionFactory.GetCondition("Dead");
 
         public Guid Guid { get; private set; }
 

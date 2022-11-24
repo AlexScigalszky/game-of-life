@@ -61,11 +61,11 @@ namespace GameOfLIfe.Implementations
 
                 if (_god.IsAlive(cell, neigbords))
                 {
-                    newStates[cell] = new AliveCondition("Alive");
+                    newStates[cell] = AliveConditionFactory.GetCondition("Alive");
                 }
                 else
                 {
-                    newStates[cell] = new AliveCondition("Dead");
+                    newStates[cell] = AliveConditionFactory.GetCondition("Dead");
                 }
             }
 
