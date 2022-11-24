@@ -13,22 +13,22 @@ namespace GameOfLIfe.Implementations
             {
                 if (countAlive == 2 || countAlive == 3)
                 {
-                    return new AliveCondition("Alive");
+                    return AliveCondition.GetAlive();
                 }
                 else
                 {
-                    return new AliveCondition("Dead");
+                    return AliveCondition.GetDead();
                 }
             }
             else
             {
                 if (countAlive == 3)
                 {
-                    return new AliveCondition("Alive");
+                    return AliveCondition.GetAlive();
                 }
                 else
                 {
-                    return new AliveCondition("Dead");
+                    return AliveCondition.GetDead();
                 }
             }
         }
@@ -37,8 +37,8 @@ namespace GameOfLIfe.Implementations
         {
             var _random = new Random();
             return _random.NextSingle() > 0.5
-                ? new AliveCondition("Alive")
-                : new AliveCondition("Dead");
+                ? AliveCondition.GetAlive()
+                : AliveCondition.GetDead();
         }
     }
 }
