@@ -4,19 +4,32 @@ namespace GameOfLIfe.Implementations
 {
     public class ClassicGod : IGod
     {
-
-        public bool IsAlive(ICell cell, IEnumerable<ICell> neigthbords)
+        public ICellState GetNextCellState(ICell cell, IEnumerable<ICell> neigthbords)
         {
             var countAlive = neigthbords.Count(x => x?.CurrentState.State == "Alive");
             var isAlive = cell.CurrentState.State == "Alive";
 
             if (isAlive)
             {
-                return countAlive == 2 || countAlive == 3;
+                if (countAlive == 2 || countAlive == 3)
+                {
+                    return new AliveCondition("Alive");
+                }
+                else
+                {
+                    return new AliveCondition("Dead");
+                }
             }
             else
             {
-                return countAlive == 3;
+                if (countAlive == 3)
+                {
+                    return new AliveCondition("Alive");
+                }
+                else
+                {
+                    return new AliveCondition("Dead");
+                }
             }
         }
 
