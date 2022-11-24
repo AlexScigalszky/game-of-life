@@ -1,13 +1,12 @@
 ﻿using Engine.Implementations;
-using GameOfLIfe;
 
-Console.WriteLine("Game of Life");
+Console.WriteLine(" ---- Game of Life ---- ");
 
 var squareSize = 20;
 var game = new GameOfLife();
-var random = new Random();
+
 var god = new ClassicGod();
-var shouldContinue = () => random.NextSingle() <= 0.8;
+var ender = new RandomEnder();
 
 while (true)
 {
@@ -15,10 +14,10 @@ while (true)
     var printer = new PrinterObserver(squareSize);
 
     Console.WriteLine("Starting...");
-    game.Initialize(land, god, printer);
+    game.Initialize(land, god, printer, ender);
 
     Console.WriteLine("Started");
-    game.Start(shouldContinue);
+    game.Start();
 
     Console.WriteLine("Finished");
 

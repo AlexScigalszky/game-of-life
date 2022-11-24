@@ -2,8 +2,8 @@
 {
     public interface IGame
     {
-        void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer);
+        void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer, IEnder ender);
 
-        void Start(Func<bool> shouldContinue);
+        void Start();
     }
 }
