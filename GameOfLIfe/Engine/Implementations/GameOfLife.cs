@@ -8,12 +8,14 @@ namespace Engine.Implementations
         private IGod? _god;
         private IGameObserver? _observer;
         private IGameLand<ICell>? _land;
+        private IEnder? _ender;
 
-        public void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer)
+        public void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer, IEnder ender)
         {
             _land = land;
             _god = god;
             _observer = observer;
+            _ender = ender;
             for (var i = 0; i < _land.AvaliableSpaces; i++)
             {
                 var cell = new Cell
@@ -25,7 +27,7 @@ namespace Engine.Implementations
             _isPlaying = false;
 
         }
-        public void Start(Func<bool> shouldContinue)
+        public void Start()
         {
             var occupants = _land?.Occupants ?? Array.Empty<ICell>();
             _observer?.Update(occupants);
@@ -40,7 +42,7 @@ namespace Engine.Implementations
 
                 _observer?.Update(occupants);
 
-                _isPlaying = shouldContinue();
+                _isPlaying = _ender?.ShouldContinue() ?? false;
             }
         }
 
