@@ -6,6 +6,7 @@ namespace Engine.Implementations
     {
         private static AliveCondition? _alive;
         private static AliveCondition? _dead;
+        private static object _deadLock = new();
 
         public string State { get; private set; }
 
@@ -23,12 +24,23 @@ namespace Engine.Implementations
             return _alive;
         }
 
+        /// <summary>
+        /// Using double check and implement thread safe lock
+        /// </summary>
+        /// <returns></returns>
         public static AliveCondition GetDead()
         {
-            if (_dead == null)
+            if (_dead is null) // The first check
             {
-                _dead = new AliveCondition("Dead");
+                lock (_deadLock)
+                {
+                    if (_dead is null) // The second (double) check
+                    {
+                        _dead = new AliveCondition("Dead");
+                    }
+                }
             }
+
             return _dead;
         }
     }
