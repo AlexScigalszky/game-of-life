@@ -1,4 +1,4 @@
-﻿namespace GameOfLIfe.Interfaces
+﻿namespace Engine.Interfaces
 {
     public interface IGameLand<T> where T : class, ICell
     {
