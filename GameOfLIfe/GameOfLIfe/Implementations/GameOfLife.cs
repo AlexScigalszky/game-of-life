@@ -5,9 +5,9 @@ namespace GameOfLIfe.Implementations
     public class GameOfLife : IGame
     {
         private bool _isPlaying = false;
-        private IGod _god;
-        private IGameObserver _observer;
-        private IGameLand<ICell> _land;
+        private IGod? _god;
+        private IGameObserver? _observer;
+        private IGameLand<ICell>? _land;
 
         public void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer)
         {
@@ -27,7 +27,8 @@ namespace GameOfLIfe.Implementations
         }
         public void Start(Func<bool> shouldContinue)
         {
-            _observer.Update(_land.Occupants);
+            var occupants = _land?.Occupants ?? Array.Empty<ICell>();
+            _observer?.Update(occupants);
             _isPlaying = true;
 
             while (_isPlaying)
@@ -37,36 +38,31 @@ namespace GameOfLIfe.Implementations
 
                 UpdateNewStates(nextStates);
 
-                _observer.Update(_land.Occupants);
+                _observer?.Update(occupants);
 
                 _isPlaying = shouldContinue();
             }
         }
 
-        private void UpdateNewStates(Dictionary<ICell, ICellState> nextStates)
+        private void UpdateNewStates(Dictionary<ICell, ICellState?> nextStates)
         {
             foreach (var obj in nextStates)
             {
-                obj.Key.CurrentState = obj.Value;
+                if (obj.Value != null)
+                {
+                    obj.Key.CurrentState = obj.Value;
+                }
             }
         }
 
-        private Dictionary<ICell, ICellState> CalculateNextStates()
+        private Dictionary<ICell, ICellState?> CalculateNextStates()
         {
-            var newStates = new Dictionary<ICell, ICellState>();
-
-            foreach (var cell in _land.Occupants)
+            var newStates = new Dictionary<ICell, ICellState?>();
+            var occupants = _land?.Occupants ?? Array.Empty<ICell>();
+            foreach (var cell in occupants)
             {
-                var neigbords = _land.GetNeigbords(cell);
-
-                if (_god.IsAlive(cell, neigbords))
-                {
-                    newStates[cell] = new AliveCondition("Alive");
-                }
-                else
-                {
-                    newStates[cell] = new AliveCondition("Dead");
-                }
+                var neigbords = _land?.GetNeigbords(cell) ?? Array.Empty<ICell>();
+                newStates[cell] = _god?.GetNextCellState(cell, neigbords);
             }
 
             return newStates;
