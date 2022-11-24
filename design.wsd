@@ -1,0 +1,71 @@
+title Untitled
+
+Program->+GameOfLife: new
+GameOfLife-->-Program: newInstance
+Program->+PrinterObserver: new
+PrinterObserver-->-Program: observer
+
+Program->+GameOfLife: Initialize(width, height, observer)
+
+    loop for w in width and w in height
+        GameOfLife->+Cell: new
+        Cell-->-GameOfLife: newInstance
+        GameOfLife->GameOfLife: GetRandomCellState
+        GameOfLife->+CellState: new (initialValue)
+        CellState-->-GameOfLife: newInstance
+        GameOfLife->Cell: SetState(state)
+        GameOfLife->GameOfLife: PutCell(w,h,cell)
+    end
+    
+    Program->GameOfLife: Start(observer)
+    
+    loop Playing
+    
+        GameOfLife->+GameOfLife: CalculateNextStates
+            loop for w in width and w in height
+                GameOfLife->+GameOfLife: CalculateNextStates(w,h)
+                    
+                    GameOfLife->+GameOfLife: GetCell(w,h)
+                    GameOfLife-->-GameOfLife: cell
+                    
+                    GameOfLife->+GameOfLife: GetNeigbords(w,h)
+                    
+                        GameOfLife->GameOfLife: GetCell(w-1,h-1)
+                        GameOfLife->GameOfLife: GetCell(w-1,h)
+                        GameOfLife->GameOfLife: GetCell(w-1,h+1)
+                        
+                        GameOfLife->GameOfLife: GetCell(w,h-1)
+                        GameOfLife->GameOfLife: GetCell(w,h+1)
+                        
+                        GameOfLife->GameOfLife: GetCell(w+1,h-1)
+                        GameOfLife->GameOfLife: GetCell(w+1,h)
+                        GameOfLife->GameOfLife: GetCell(w+1,h+1)
+                        
+                        note right of GameOfLife: Filter cells not null
+                        
+                    GameOfLife-->-GameOfLife: neigthbords
+                    
+                    GameOfLife->+God: IsAlive(cell, neigthbords)
+                    God-->-GameOfLife: newState
+                    note right of God: Any live cell with two or three live neighbours survives.
+                    note right of God: Any dead cell with three live neighbours becomes a live cell.
+                    note right of God: All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+                
+                GameOfLife-->-GameOfLife: newState
+            end
+        GameOfLife-->-GameOfLife: arrayOfNewStates
+        
+        loop for w in width and w in height
+            GameOfLife->+GameOfLife: GetCell(w,h)
+            GameOfLife-->-GameOfLife: cell
+            
+            GameOfLife->Cell: SetState(w,h)
+        end
+        
+        GameOfLife->+PrinterObserver: Update(cellsGrid)
+        PrinterObserver->-GameOfLife: Playing
+        
+    
+    end
+
+Program->GameOfLife: Finish
