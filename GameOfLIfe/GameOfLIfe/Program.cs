@@ -1,22 +1,15 @@
 ﻿using Engine.Implementations;
-using GameOfLIfe;
 
-Console.WriteLine("Game of Life");
+Console.WriteLine(" ---- Game of Life ---- ");
 
-var squareSize = 20;
-var game = new GameOfLife();
-
-var god = new ClassicGod();
-var ender = new RandomEnder();
+var builder = new SquareRandomIterationsBuilder();
+var director = new Director(builder);
 
 while (true)
 {
-    var land = new SquareLand(squareSize);
-    var printer = new PrinterObserver(squareSize);
-
     Console.WriteLine("Starting...");
-    game.Initialize(land, god, printer, ender);
-
+    var game = director.Make();
+    
     Console.WriteLine("Started");
     game.Start();
 

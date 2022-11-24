@@ -6,6 +6,7 @@
         void BuildLand();
         void BuildGod();
         void BuildObserver();
+        void BuildEnder();
         IGame GetGame();
     }
 }
