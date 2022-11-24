@@ -1,6 +1,6 @@
-﻿using GameOfLIfe.Interfaces;
+﻿using Engine.Interfaces;
 
-namespace GameOfLIfe.Implementations
+namespace Engine.Implementations
 {
     public class SquareLand : IGameLand<ICell>
     {

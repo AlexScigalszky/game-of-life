@@ -1,4 +1,4 @@
-﻿namespace GameOfLIfe.Implementations
+﻿namespace Engine.Implementations
 {
     public class AliveConditionFactory
     {
