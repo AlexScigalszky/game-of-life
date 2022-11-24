@@ -1,6 +1,6 @@
 ﻿using Engine.Interfaces;
 
-namespace GameOfLIfe
+namespace Engine.Implementations
 {
     public class PrinterObserver : IGameObserver
     {
