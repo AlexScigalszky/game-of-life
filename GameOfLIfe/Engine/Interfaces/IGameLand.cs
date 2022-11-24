@@ -6,5 +6,6 @@
         IEnumerable<T> Occupants { get; }
         void OccupyNextAvaliableSpace(T cell);
         IEnumerable<T> GetNeigbords(T occupant);
+        IGameLand<T> Clone();
     }
 }

@@ -82,5 +82,24 @@ namespace Engine.Implementations
             return default;
 
         }
+
+        public IGameLand<ICell> Clone()
+        {
+            var clone = new SquareLand(_width)
+            {
+                _grid = new ICell[_maxAvailableSpace],
+                _nextAvailableSpace = _nextAvailableSpace,
+                _maxAvailableSpace = _maxAvailableSpace,
+                _indexes = new Dictionary<Guid, int>(_indexes),
+            };
+
+            int count = 0;
+            foreach(var cell in _grid)
+            {
+                clone._grid[count] = cell;
+                count++;
+            }
+            return clone;
+        }
     }
 }

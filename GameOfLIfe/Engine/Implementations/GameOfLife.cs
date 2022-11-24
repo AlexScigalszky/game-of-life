@@ -59,6 +59,7 @@ namespace Engine.Implementations
         {
             var newStates = new Dictionary<ICell, ICellState?>();
             var occupants = _land?.Occupants ?? Array.Empty<ICell>();
+
             foreach (var cell in occupants)
             {
                 var neigbords = _land?.GetNeigbords(cell) ?? Array.Empty<ICell>();
