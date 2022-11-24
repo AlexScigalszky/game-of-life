@@ -1,7 +1,6 @@
 ﻿using Engine.Implementations;
-using GameOfLIfe;
 
-Console.WriteLine("Game of Life");
+Console.WriteLine(" ---- Game of Life ---- ");
 
 var squareSize = 20;
 var game = new GameOfLife();
