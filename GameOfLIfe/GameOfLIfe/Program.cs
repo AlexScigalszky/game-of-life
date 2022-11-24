@@ -1,8 +1,9 @@
-﻿using GameOfLIfe.Implementations;
+﻿using Engine.Implementations;
+using GameOfLIfe;
 
 Console.WriteLine("Game of Life");
 
-var squareSize = 4;
+var squareSize = 20;
 var game = new GameOfLife();
 var random = new Random();
 var god = new ClassicGod();
