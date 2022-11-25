@@ -1,4 +1,5 @@
 ﻿using Engine.Interfaces;
+using System.Text;
 
 namespace GameOfLife.BlazorWebAssembly
 {
@@ -15,30 +16,45 @@ namespace GameOfLife.BlazorWebAssembly
 
         public void Update(IEnumerable<ICell> cells)
         {
-            var newStep = $"Print step {_step}" + "\n";
+            var newStep = "";
 
-            var str = "|";
-            for (var j = 0; j < _width - 1; j++)
-            {
-                str += "----";
-            }
-            newStep += str + "\n";
+            newStep += "<table>";
+            newStep += $"<caption>Print step {_step}</caption>";
+            newStep += "<tbody>";
             for (var i = 0; i < _width - 1; i++)
             {
-                str = "|";
+                newStep += "<tr>";
                 for (var j = 0; j < _width - 1; j++)
                 {
-                    str += Print(cells.ElementAt(i * j + 1)) + "|";
+                    newStep += "<td>"+ Print(cells.ElementAt(i * j + 1)) +"</td>";
                 }
-                newStep += str + "\n";
-
-                str = "|";
-                for (var j = 0; j < _width - 1; j++)
-                {
-                    str += "----";
-                }
-                newStep += str + "\n";
+                newStep += "</tr>";
             }
+            newStep += "</tbody>";
+            newStep += "</table>";
+
+            //var str = "|";
+            //for (var j = 0; j < _width - 1; j++)
+            //{
+            //    str += "----";
+            //}
+            //newStep += str + "\n";
+            //for (var i = 0; i < _width - 1; i++)
+            //{
+            //    str = "|";
+            //    for (var j = 0; j < _width - 1; j++)
+            //    {
+            //        str += Print(cells.ElementAt(i * j + 1)) + "|";
+            //    }
+            //    newStep += str + "\n";
+
+            //    str = "|";
+            //    for (var j = 0; j < _width - 1; j++)
+            //    {
+            //        str += "----";
+            //    }
+            //    newStep += str + "\n";
+            //}
 
             Logger = newStep + "\n" + Logger;
             _step++;

@@ -11,8 +11,9 @@
 <h1>Game of Life</h1>
 
 <button @onclick="Play">Again</button>
+<hr />
 
-<code><pre>@_observer.Logger</pre></code>
+@((MarkupString)@_observer.Logger)
 
 
 @code {
@@ -25,17 +26,7 @@
     public void Play()
     {
         _land.Reset();
-        //while (true)
-        //    {
-        Console.WriteLine("Starting...");
         _game.Initialize(_land, _god, _observer, _ender);
-
-        Console.WriteLine("Started");
         _game.Start();
-
-        Console.WriteLine("Finished");
-
-        //Console.ReadLine();
-        //}
     }
 }
