@@ -19,11 +19,11 @@ namespace Engine.Implementations
             }
         }
 
-        private ICell[] _grid;
-        private int _nextAvailableSpace = 0;
-        private static int _width;
-        private int _maxAvailableSpace = 0;
-        private Dictionary<Guid, int> _indexes;
+        protected ICell[] _grid;
+        protected int _nextAvailableSpace = 0;
+        protected static int _width;
+        protected int _maxAvailableSpace = 0;
+        protected Dictionary<Guid, int> _indexes;
 
         public SquareLand(int width)
         {
