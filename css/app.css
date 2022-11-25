@@ -96,12 +96,12 @@ td {
 
 
 .alive {
-    background-image: url("icons/alive.png");
+    background-image: url("../icons/alive.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
 .dead {
-    background-image: url("icons/death.png");
+    background-image: url("../icons/death.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
