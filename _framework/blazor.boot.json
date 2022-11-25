@@ -8,7 +8,7 @@
   "resources": {
     "assembly": {
       "Engine.dll": "sha256-Rp851n2JBeLqHjb+I0n+GO\/bxVWxSQEmgzOTg9rv8vU=",
-      "GameOfLife.BlazorWebAssembly.dll": "sha256-o1fzCFRvrvZa0bhzix537XYNGg01EQ0WnaN6pbs1yJU=",
+      "GameOfLife.BlazorWebAssembly.dll": "sha256-c5D47wgHrkvXba0kcWMzTS72iE3i6J6lrFcVAuAhWbQ=",
       "Microsoft.AspNetCore.Components.dll": "sha256-mvvy6ZiDgJyHUz7I+paUIt8RgbF9qDwS09uF1NZNeSo=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-vmrYVSogq77Tk9Aepkoicj2xY7VcbOVTDRl9wpOZlTQ=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-fU++FmqwUrqJCEERHJg9QV1FYgo7QPFzS8YSn9pqCe0=",
