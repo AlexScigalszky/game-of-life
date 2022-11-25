@@ -4,18 +4,15 @@ namespace Engine.Implementations
 {
     public class GameOfLife : IGame
     {
-        private bool _isPlaying = false;
         private IGod? _god;
         private IGameObserver? _observer;
         private IGameLand<ICell>? _land;
-        private IEnder? _ender;
 
-        public void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer, IEnder ender)
+        public void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer)
         {
             _land = land;
             _god = god;
             _observer = observer;
-            _ender = ender;
             for (var i = 0; i < _land.AvaliableSpaces; i++)
             {
                 var cell = new Cell
@@ -24,26 +21,23 @@ namespace Engine.Implementations
                 };
                 _land.OccupyNextAvaliableSpace(cell);
             }
-            _isPlaying = false;
 
         }
         public void Start()
         {
             var occupants = _land?.Occupants ?? Array.Empty<ICell>();
             _observer?.Update(occupants);
-            _isPlaying = true;
+        }
 
-            while (_isPlaying)
-            {
+        public void Next()
+        {
+            var occupants = _land?.Occupants ?? Array.Empty<ICell>();
 
-                var nextStates = CalculateNextStates();
+            var nextStates = CalculateNextStates();
 
-                UpdateNewStates(nextStates);
+            UpdateNewStates(nextStates);
 
-                _observer?.Update(occupants);
-
-                _isPlaying = _ender?.ShouldContinue() ?? false;
-            }
+            _observer?.Update(occupants);
         }
 
         private void UpdateNewStates(Dictionary<ICell, ICellState?> nextStates)

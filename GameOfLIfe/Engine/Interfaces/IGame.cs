@@ -2,8 +2,10 @@
 {
     public interface IGame
     {
-        void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer, IEnder ender);
+        void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer);
 
         void Start();
+
+        void Next();
     }
 }
