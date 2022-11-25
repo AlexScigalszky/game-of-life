@@ -15,9 +15,11 @@ jobs:
       # publishes Blazor project to the release-folder
       - name: Publish .NET Core Project
         run: dotnet publish GameOfLIfe/GameOfLife.BlazorWebAssembly/GameOfLife.BlazorWebAssembly.csproj -c Release -o release --nologo
+      - name: CONSOLE
+        run: ls
       - name: Commit wwwroot to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER:  GameOfLIfe/GameOfLife.BlazorWebAssembly/release/wwwroot
+          FOLDER:  release/wwwroot
