@@ -1,0 +1,41 @@
+﻿@page "/"
+@inject Engine.Implementations.GameOfLife _game
+@inject Engine.Implementations.RandomEnder _ender
+@inject SquareLandReseatable _land
+@inject HtmlObserver _observer
+@inject Engine.Implementations.ClassicGod _god
+@inject IJSRuntime JsRuntime
+
+<PageTitle>Game of Life</PageTitle>
+
+<h1>Game of Life</h1>
+
+<button @onclick="Play">Again</button>
+
+<code><pre>@_observer.Logger</pre></code>
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Play();
+    }
+
+    public void Play()
+    {
+        _land.Reset();
+        //while (true)
+        //    {
+        Console.WriteLine("Starting...");
+        _game.Initialize(_land, _god, _observer, _ender);
+
+        Console.WriteLine("Started");
+        _game.Start();
+
+        Console.WriteLine("Finished");
+
+        //Console.ReadLine();
+        //}
+    }
+}

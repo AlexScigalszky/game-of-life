@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameOfLIfe", "GameOfLIfe\GameOfLIfe.csproj", "{0B9415E6-0C79-4B9A-AEC2-12C4F257F723}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameOfLIfe", "GameOfLIfe\GameOfLIfe.csproj", "{0B9415E6-0C79-4B9A-AEC2-12C4F257F723}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{757AEE4A-220A-4EEE-A2B7-58329CB294CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engine", "Engine\Engine.csproj", "{757AEE4A-220A-4EEE-A2B7-58329CB294CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameOfLife.BlazorWebAssembly", "GameOfLife.BlazorWebAssembly\GameOfLife.BlazorWebAssembly.csproj", "{97038073-8099-4976-8FCC-4BD97F59333F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{757AEE4A-220A-4EEE-A2B7-58329CB294CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{757AEE4A-220A-4EEE-A2B7-58329CB294CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{757AEE4A-220A-4EEE-A2B7-58329CB294CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97038073-8099-4976-8FCC-4BD97F59333F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97038073-8099-4976-8FCC-4BD97F59333F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97038073-8099-4976-8FCC-4BD97F59333F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97038073-8099-4976-8FCC-4BD97F59333F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
