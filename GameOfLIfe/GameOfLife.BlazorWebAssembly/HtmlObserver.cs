@@ -18,43 +18,20 @@ namespace GameOfLife.BlazorWebAssembly
         {
             var newStep = "";
 
+            newStep += $"<h1>Print step {_step}</h1>";
             newStep += "<table>";
-            newStep += $"<caption>Print step {_step}</caption>";
             newStep += "<tbody>";
             for (var i = 0; i < _width - 1; i++)
             {
                 newStep += "<tr>";
                 for (var j = 0; j < _width - 1; j++)
                 {
-                    newStep += "<td>"+ Print(cells.ElementAt(i * j + 1)) +"</td>";
+                    newStep += Print(cells.ElementAt(i * j + 1));
                 }
                 newStep += "</tr>";
             }
             newStep += "</tbody>";
             newStep += "</table>";
-
-            //var str = "|";
-            //for (var j = 0; j < _width - 1; j++)
-            //{
-            //    str += "----";
-            //}
-            //newStep += str + "\n";
-            //for (var i = 0; i < _width - 1; i++)
-            //{
-            //    str = "|";
-            //    for (var j = 0; j < _width - 1; j++)
-            //    {
-            //        str += Print(cells.ElementAt(i * j + 1)) + "|";
-            //    }
-            //    newStep += str + "\n";
-
-            //    str = "|";
-            //    for (var j = 0; j < _width - 1; j++)
-            //    {
-            //        str += "----";
-            //    }
-            //    newStep += str + "\n";
-            //}
 
             Logger = newStep + "\n" + Logger;
             _step++;
@@ -62,7 +39,7 @@ namespace GameOfLife.BlazorWebAssembly
 
         private string Print(ICell cell)
         {
-            return cell.CurrentState.State == "Alive" ? " 0 " : "   ";
+            return cell.CurrentState.State == "Alive" ? "<td class=\"alive\"></td>" : "<td class=\"dead\"></td>" + "";
         }
     }
 }
