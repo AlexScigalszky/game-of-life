@@ -4,15 +4,39 @@ namespace Engine.Implementations
 {
     public class GameOfLife : IGame
     {
+        private struct GameOfLifeSnapshot : IGameSnapshot
+        {
+            public string Name { get; set; }
+            public IGodSnapshot? God { get; set; }
+            public IGameLandSnapshot? Land { get; set; }
+            public IGame Originator { get; set; }
+            public int Step { get; set; }
+
+            public void RestoreState()
+            {
+                if (Originator is GameOfLife game)
+                {
+                    Console.WriteLine("GameOfLifeSnapshot - Restore");
+                    God?.RestoreState();
+                    Land?.RestoreState();
+                    game.Step = Step;
+                    game._observer?.Update(game);
+                }
+            }
+        }
+
         private IGod? _god;
         private IGameObserver? _observer;
         private IGameLand<ICell>? _land;
+
+        public int Step { get; set; }
 
         public void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer)
         {
             _land = land;
             _god = god;
             _observer = observer;
+            Step = 0;
             for (var i = 0; i < _land.AvaliableSpaces; i++)
             {
                 var cell = new Cell
@@ -23,24 +47,23 @@ namespace Engine.Implementations
             }
 
         }
+
         public void Start()
         {
-            var occupants = _land?.Occupants ?? Array.Empty<ICell>();
-            _observer?.Update(occupants);
+            _observer?.Update(this);
         }
 
         public void Next()
         {
-            var occupants = _land?.Occupants ?? Array.Empty<ICell>();
-
+            Step++;
             var nextStates = CalculateNextStates();
 
             UpdateNewStates(nextStates);
 
-            _observer?.Update(occupants);
+            _observer?.Update(this);
         }
 
-        private void UpdateNewStates(Dictionary<ICell, ICellState?> nextStates)
+        private static void UpdateNewStates(Dictionary<ICell, ICellState?> nextStates)
         {
             foreach (var obj in nextStates)
             {
@@ -64,5 +87,21 @@ namespace Engine.Implementations
             return newStates;
         }
 
+        public IGameSnapshot CreateSnapshot()
+        {
+            Console.WriteLine("IGameSnapshot");
+            return new GameOfLifeSnapshot()
+            {
+                Originator = this,
+                God = _god?.CreateSnapshot(),
+                Land = _land?.CreateSnapshot(),
+                Step = Step
+            };
+        }
+
+        public IEnumerable<ICell> GetCells()
+        {
+            return _land?.Occupants ?? Array.Empty<ICell>();
+        }
     }
 }

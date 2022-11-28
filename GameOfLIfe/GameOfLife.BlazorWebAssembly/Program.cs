@@ -15,7 +15,5 @@ builder.Services.AddTransient((_) => new Engine.Implementations.SquareLand(20));
 builder.Services.AddTransient((_) => new SquareLandReseatable(20));
 builder.Services.AddScoped((_) => new HtmlObserver(20)); 
 
-builder.Services.AddScoped((_) => new Engine.Implementations.PrinterObserver(20));
-
 
 await builder.Build().RunAsync();

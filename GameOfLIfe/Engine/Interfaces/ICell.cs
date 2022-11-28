@@ -4,5 +4,6 @@
     {
         ICellState CurrentState { get; set; }
         public Guid Guid { get; }
+        ICellSnapshot CreateSnapshot();
     }
 }

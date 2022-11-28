@@ -11,7 +11,7 @@ var ender = new RandomEnder();
 while (true)
 {
     var land = new SquareLand(squareSize);
-    var printer = new PrinterObserver(squareSize);
+    var printer = new MementoObserver();
 
     Console.WriteLine("Starting...");
     game.Initialize(land, god, printer);

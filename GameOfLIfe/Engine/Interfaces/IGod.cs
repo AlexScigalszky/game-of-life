@@ -4,5 +4,6 @@
     {
         ICellState GetNextCellState(ICell cell, IEnumerable<ICell> neigthbords);
         ICellState GetRandomCellState();
+        IGodSnapshot CreateSnapshot();
     }
 }

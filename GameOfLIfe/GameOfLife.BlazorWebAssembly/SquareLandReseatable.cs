@@ -11,9 +11,7 @@ namespace GameOfLife.BlazorWebAssembly
 
         public void Reset()
         {
-            _nextAvailableSpace = 0;
-            _grid = new ICell[_maxAvailableSpace];
-            _indexes = new Dictionary<Guid, int>();
+            
         }
     }
 }

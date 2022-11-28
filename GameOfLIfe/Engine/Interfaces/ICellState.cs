@@ -3,5 +3,6 @@
     public interface ICellState
     {
         public string State { get; }
+        ICellStateSnapshot CreateSnapshot();
     }
 }

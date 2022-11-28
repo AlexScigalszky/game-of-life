@@ -4,6 +4,35 @@ namespace Engine.Implementations
 {
     public class SquareLand : IGameLand<ICell>
     {
+        private struct SquareLandSnapshot : IGameLandSnapshot
+        {
+            public string Name { get; set; }
+            public ICellSnapshot[] Grid { get; set; }
+            public int NextAvailableSpace { get; set; }
+            public int Width { get; set; }
+            public int MaxAvailableSpace { get; set; }
+            public Dictionary<Guid, int> Indexes { get; set; }
+            public IGameLand<ICell> Originator { get; set; }
+            public ICell[] GridOriginator { get; internal set; }
+
+            public void RestoreState()
+            {
+                if (Originator is SquareLand land)
+                {
+                    Console.WriteLine("IGameLandSnapshot - Restore");
+                    land._nextAvailableSpace = NextAvailableSpace;
+                    land._maxAvailableSpace = MaxAvailableSpace;
+                    land._width = Width;
+                    land._indexes = Indexes;
+                    land._grid = GridOriginator;
+                    foreach(var snap in Grid)
+                    {
+                        snap.RestoreState();
+                    }
+                }
+            }
+        }
+
         public int AvaliableSpaces
         {
             get
@@ -19,11 +48,11 @@ namespace Engine.Implementations
             }
         }
 
-        protected ICell[] _grid;
-        protected int _nextAvailableSpace = 0;
-        protected static int _width;
-        protected int _maxAvailableSpace = 0;
-        protected Dictionary<Guid, int> _indexes;
+        private ICell[] _grid;
+        private int _nextAvailableSpace = 0;
+        private int _width;
+        private int _maxAvailableSpace = 0;
+        private Dictionary<Guid, int> _indexes;
 
         public SquareLand(int width)
         {
@@ -81,6 +110,21 @@ namespace Engine.Implementations
             }
             return default;
 
+        }
+
+        public IGameLandSnapshot CreateSnapshot()
+        {
+            Console.WriteLine("IGameLandSnapshot");
+            return new SquareLandSnapshot()
+            {
+                Originator = this,
+                GridOriginator = _grid,
+                Grid = _grid.Select(x => x.CreateSnapshot()).ToArray(),
+                NextAvailableSpace = _nextAvailableSpace,
+                Width = _width,
+                MaxAvailableSpace = _maxAvailableSpace,
+                Indexes = _indexes
+            };
         }
     }
 }

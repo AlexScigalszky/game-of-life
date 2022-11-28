@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Engine.Interfaces
 @inject Engine.Implementations.GameOfLife _game
 @inject Engine.Implementations.RandomEnder _ender
 @inject SquareLandReseatable _land
@@ -11,6 +12,7 @@
 <h1>Game of Life</h1>
 
 <button @onclick="Play">Again</button>
+<button @onclick="Previous">Previous</button>
 <button @onclick="Next">Next</button>
 <hr />
 
@@ -18,6 +20,7 @@
 
 
 @code {
+    private Stack<IGameSnapshot> History = new Stack<IGameSnapshot>();
 
     protected override void OnInitialized()
     {
@@ -26,17 +29,25 @@
 
     public void Play()
     {
-        _land.Reset();
         _game.Initialize(_land, _god, _observer);
         _game.Start();
-        _game.Next();
+        History.Push(_game.CreateSnapshot());
     }
 
     public void Next()
     {
         //if (_ender?.ShouldContinue() ?? false)
         //{
-            _game.Next();
+        _game.Next();
+        History.Push(_game.CreateSnapshot());
         //}
+    }
+    public void Previous()
+    {
+        if (History.Count > 0)
+        {
+            Console.WriteLine("previous");
+            History.Pop().RestoreState();
+        }
     }
 }

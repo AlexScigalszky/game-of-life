@@ -4,6 +4,14 @@ namespace Engine.Implementations
 {
     public class ClassicGod : IGod
     {
+        private struct ClassicGodSnapshot : IGodSnapshot
+        {
+            public IGod Originator { get; set; }
+            public string Name { get; set; }
+
+            public void RestoreState() { }
+        }
+
         public ICellState GetNextCellState(ICell cell, IEnumerable<ICell> neigthbords)
         {
             var countAlive = neigthbords.Count(x => x?.CurrentState.State == "Alive");
@@ -39,6 +47,14 @@ namespace Engine.Implementations
             return _random.NextSingle() > 0.5
                 ? new AliveCondition("Alive")
                 : new AliveCondition("Dead");
+        }
+
+        public IGodSnapshot CreateSnapshot()
+        {
+            return new ClassicGodSnapshot()
+            {
+                Originator = this
+            };
         }
     }
 }

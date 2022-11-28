@@ -2,6 +2,6 @@
 {
     public interface IGameObserver
     {
-        void Update(IEnumerable<ICell> cells);
+        void Update(IGame game);
     }
 }
