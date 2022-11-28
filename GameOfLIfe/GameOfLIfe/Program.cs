@@ -13,6 +13,13 @@ while (true)
     Console.WriteLine("Started");
     game.Start();
 
+    do
+    {
+        game.Next();
+    }
+    while (ender?.ShouldContinue() ?? false);
+
+
     Console.WriteLine("Finished");
 
     Console.ReadLine();
