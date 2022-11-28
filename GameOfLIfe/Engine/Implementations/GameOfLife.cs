@@ -28,6 +28,7 @@ namespace Engine.Implementations
         private IGod? _god;
         private IGameObserver? _observer;
         private IGameLand<ICell>? _land;
+        public int Step { get; private set; }
 
         public int Step { get; set; }
 
