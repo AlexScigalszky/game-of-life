@@ -5,18 +5,17 @@ namespace Engine.Implementations
     public class PrinterObserver : IGameObserver
     {
         private int _width = 5;
-        private int _step = 0;
 
         public PrinterObserver(int width)
         {
             _width = width;
         }
 
-        public void Update(IEnumerable<ICell> cells)
+        public void Update(IEnumerable<ICell> cells, int step)
         {
             //Console.Clear();
 
-            Console.WriteLine($"Print step {_step}");
+            Console.WriteLine($"Print step {step}");
 
             var str = "|";
             for (var j = 0; j < _width - 1; j++)
@@ -40,8 +39,6 @@ namespace Engine.Implementations
                 }
                 Console.WriteLine(str);
             }
-
-            _step++;
         }
 
         private string Print(ICell cell)

@@ -7,6 +7,7 @@ namespace Engine.Implementations
         private IGod? _god;
         private IGameObserver? _observer;
         private IGameLand<ICell>? _land;
+        public int Step { get; private set; }
 
         public void Initialize(IGameLand<ICell> land, IGod god, IGameObserver observer)
         {
@@ -26,18 +27,20 @@ namespace Engine.Implementations
         public void Start()
         {
             var occupants = _land?.Occupants ?? Array.Empty<ICell>();
-            _observer?.Update(occupants);
+            Step = 0;
+            _observer?.Update(occupants, Step);
         }
 
         public void Next()
         {
+            Step++;
             var occupants = _land?.Occupants ?? Array.Empty<ICell>();
 
             var nextStates = CalculateNextStates();
 
             UpdateNewStates(nextStates);
 
-            _observer?.Update(occupants);
+            _observer?.Update(occupants, Step);
         }
 
         private void UpdateNewStates(Dictionary<ICell, ICellState?> nextStates)
