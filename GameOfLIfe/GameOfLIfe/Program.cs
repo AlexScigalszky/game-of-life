@@ -14,10 +14,17 @@ while (true)
     var printer = new PrinterObserver(squareSize);
 
     Console.WriteLine("Starting...");
-    game.Initialize(land, god, printer, ender);
+    game.Initialize(land, god, printer);
 
     Console.WriteLine("Started");
     game.Start();
+
+    do
+    {
+        game.Next();
+    }
+    while (ender?.ShouldContinue() ?? false);
+
 
     Console.WriteLine("Finished");
 
